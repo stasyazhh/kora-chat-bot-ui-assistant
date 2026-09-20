@@ -2,40 +2,44 @@ import { ArrowRight, BookOpen, CircleDollarSign, FileText, ShieldCheck } from 'l
 import { ChatPanel } from './ChatPanel'
 import { Connectors } from './Connectors'
 import { KnowledgeCard } from './KnowledgeCard'
-import { KoraMark } from './Logo'
+import { KoraNode } from './KoraNode'
 
 const knowledgeCards = [
   {
-    icon: <FileText className="h-5 w-5" style={{ color: '#4F8CFF' }} />,
-    iconBg: 'rgba(79, 140, 255, 0.12)',
+    icon: <FileText className="h-4 w-4" style={{ color: '#7A8FA8' }} />,
+    iconBg: 'rgba(122, 143, 168, 0.12)',
     title: 'FAQ',
     subtitle: '128 questions',
+    fragments: ['How can I change my order?', 'Do you ship internationally?'],
     rotation: '-rotate-3',
-    position: 'left-[6%] top-[18%]',
+    position: 'left-[10%] top-[18%]',
   },
   {
-    icon: <BookOpen className="h-5 w-5" style={{ color: '#3CC17E' }} />,
-    iconBg: 'rgba(60, 193, 126, 0.12)',
+    icon: <BookOpen className="h-4 w-4" style={{ color: '#6FA38C' }} />,
+    iconBg: 'rgba(111, 163, 140, 0.12)',
     title: 'Product Guide',
     subtitle: '42 sections',
+    fragments: ['Getting started', 'Installation & setup'],
     rotation: 'rotate-2',
     position: 'left-[58%] top-[12%]',
   },
   {
-    icon: <ShieldCheck className="h-5 w-5" style={{ color: '#8A6CFF' }} />,
-    iconBg: 'rgba(138, 108, 255, 0.12)',
+    icon: <ShieldCheck className="h-4 w-4" style={{ color: '#8B84A8' }} />,
+    iconBg: 'rgba(139, 132, 168, 0.12)',
     title: 'Return Policy',
     subtitle: 'Updated Aug 12',
+    fragments: ['30-day returns', 'Original condition required'],
     rotation: '-rotate-2',
-    position: 'left-[4%] top-[50%]',
+    position: 'left-[8%] top-[50%]',
   },
   {
-    icon: <CircleDollarSign className="h-5 w-5" style={{ color: '#FFB347' }} />,
-    iconBg: 'rgba(255, 179, 71, 0.12)',
+    icon: <CircleDollarSign className="h-4 w-4" style={{ color: '#B8976F' }} />,
+    iconBg: 'rgba(184, 151, 111, 0.12)',
     title: 'Pricing',
     subtitle: '12 plans & options',
+    fragments: ['Starter', 'Business'],
     rotation: 'rotate-3',
-    position: 'left-[58%] top-[74%]',
+    position: 'left-[58%] top-[78%]',
   },
 ]
 
@@ -83,7 +87,7 @@ export function Hero() {
               key={card.title}
               icon={
                 <div
-                  className="flex h-10 w-10 items-center justify-center rounded-xl"
+                  className="flex h-9 w-9 items-center justify-center rounded-xl"
                   style={{ backgroundColor: card.iconBg }}
                 >
                   {card.icon}
@@ -91,16 +95,14 @@ export function Hero() {
               }
               title={card.title}
               subtitle={card.subtitle}
+              fragments={card.fragments}
               rotation={card.rotation}
               className={`absolute ${card.position} z-20`}
             />
           ))}
 
-          {/* Central Kora element */}
-          <div className="absolute left-[44%] top-1/2 z-10 flex h-32 w-32 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-gradient-to-br from-[#FFEFEA] to-[#FFE0D6] shadow-sm">
-            <KoraMark className="h-10 w-10 text-kora-accent" />
-            <span className="mt-1 text-base font-semibold text-kora-accent">Kora</span>
-          </div>
+          {/* Compact Kora node */}
+          <KoraNode className="absolute left-[46%] top-1/2 z-10 -translate-x-1/2 -translate-y-1/2" />
 
           <ChatPanel className="absolute right-0 top-1/2 z-20 -translate-y-1/2" />
         </div>
@@ -116,7 +118,7 @@ export function Hero() {
                 key={card.title}
                 icon={
                   <div
-                    className="flex h-10 w-10 items-center justify-center rounded-xl"
+                    className="flex h-9 w-9 items-center justify-center rounded-xl"
                     style={{ backgroundColor: card.iconBg }}
                   >
                     {card.icon}
@@ -124,14 +126,12 @@ export function Hero() {
                 }
                 title={card.title}
                 subtitle={card.subtitle}
+                fragments={card.fragments}
                 rotation="rotate-0"
               />
             ))}
           </div>
-          <div className="flex h-24 w-24 flex-col items-center justify-center rounded-full bg-gradient-to-br from-[#FFEFEA] to-[#FFE0D6] shadow-sm">
-            <KoraMark className="h-8 w-8 text-kora-accent" />
-            <span className="mt-0.5 text-base font-semibold text-kora-accent">Kora</span>
-          </div>
+          <KoraNode />
           <ChatPanel />
         </div>
       </div>

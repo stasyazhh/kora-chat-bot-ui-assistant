@@ -33,11 +33,11 @@ export function ChatPanel({ className = '' }: { className?: string }) {
             <div className="mt-3">
               <button
                 type="button"
-                className="group inline-flex items-center gap-1.5 rounded-full border border-kora-border bg-kora-bg px-3 py-1.5 text-xs font-medium text-kora-text transition-colors hover:border-kora-accent hover:text-kora-accent"
+                className="group inline-flex items-center gap-1.5 rounded-full border border-kora-border bg-white px-3 py-1.5 text-xs font-medium text-kora-text shadow-sm transition-all hover:border-kora-accent hover:text-kora-accent"
               >
-                <FileText className="h-3.5 w-3.5 text-kora-muted group-hover:text-kora-accent" />
+                <FileText className="h-3.5 w-3.5 text-kora-muted transition-colors group-hover:text-kora-accent" />
                 Source · Return Policy
-                <ArrowRight className="h-3 w-3 text-kora-muted transition-transform group-hover:translate-x-0.5 group-hover:text-kora-accent" />
+                <ArrowRight className="h-3 w-3 text-kora-muted transition-all group-hover:translate-x-0.5 group-hover:text-kora-accent" />
               </button>
             </div>
           </div>

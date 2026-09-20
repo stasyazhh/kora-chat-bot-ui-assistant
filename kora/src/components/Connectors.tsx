@@ -8,54 +8,63 @@ export function Connectors() {
     >
       <defs>
         <linearGradient id="connector" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#D7D5CE" stopOpacity="0.45" />
-          <stop offset="100%" stopColor="#D7D5CE" stopOpacity="0.15" />
+          <stop offset="0%" stopColor="#C8C6BE" stopOpacity="0.5" />
+          <stop offset="100%" stopColor="#C8C6BE" stopOpacity="0.15" />
         </linearGradient>
       </defs>
 
-      {/* FAQ */}
+      {/* FAQ → Kora */}
       <path
-        d="M 18 26 Q 30 30 44 46"
+        d="M 18 26 Q 30 34 44 48"
         fill="none"
         stroke="url(#connector)"
-        strokeWidth="0.4"
-        strokeDasharray="1.5 1.5"
+        strokeWidth="1"
+        strokeDasharray="3 3"
+        strokeLinecap="round"
         vectorEffect="non-scaling-stroke"
       />
-      {/* Product Guide */}
+
+      {/* Product Guide → Kora */}
       <path
-        d="M 66 18 Q 56 32 48 44"
+        d="M 66 20 Q 56 34 48 44"
         fill="none"
         stroke="url(#connector)"
-        strokeWidth="0.4"
-        strokeDasharray="1.5 1.5"
+        strokeWidth="1"
+        strokeDasharray="3 3"
+        strokeLinecap="round"
         vectorEffect="non-scaling-stroke"
       />
-      {/* Return Policy */}
+
+      {/* Return Policy → Kora */}
       <path
-        d="M 16 58 Q 30 56 40 52"
+        d="M 16 58 Q 30 58 40 54"
         fill="none"
         stroke="url(#connector)"
-        strokeWidth="0.4"
-        strokeDasharray="1.5 1.5"
+        strokeWidth="1"
+        strokeDasharray="3 3"
+        strokeLinecap="round"
         vectorEffect="non-scaling-stroke"
       />
-      {/* Pricing */}
+
+      {/* Pricing → Kora */}
       <path
-        d="M 66 80 Q 56 66 48 56"
+        d="M 64 82 Q 56 68 50 56"
         fill="none"
         stroke="url(#connector)"
-        strokeWidth="0.4"
-        strokeDasharray="1.5 1.5"
+        strokeWidth="1"
+        strokeDasharray="3 3"
+        strokeLinecap="round"
         vectorEffect="non-scaling-stroke"
       />
-      {/* Center to chat panel */}
+
+      {/* Kora → Chat panel */}
       <path
-        d="M 52 50 Q 66 50 80 50"
+        d="M 52 50 Q 56 50 60 50"
         fill="none"
         stroke="url(#connector)"
-        strokeWidth="0.4"
-        strokeDasharray="1.5 1.5"
+        strokeWidth="1"
+        strokeDasharray="3 3"
+        strokeLinecap="round"
         vectorEffect="non-scaling-stroke"
       />
     </svg>
