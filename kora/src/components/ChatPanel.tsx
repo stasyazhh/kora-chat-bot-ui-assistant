@@ -1,7 +1,43 @@
+import { motion } from 'framer-motion'
 import { ArrowRight, FileText } from 'lucide-react'
 import { KoraMark } from './Logo'
+import { useTypedWords } from '../hooks/useTypedWords'
+import type { HeroStage } from '../hooks/useHeroAnimation'
 
-export function ChatPanel({ className = '' }: { className?: string }) {
+const stageOrder: HeroStage[] = [
+  'idle',
+  'cardsVisible',
+  'connectorsVisible',
+  'signalsMoving',
+  'koraActivated',
+  'chatConnected',
+  'questionVisible',
+  'answerVisible',
+  'sourceVisible',
+  'complete',
+]
+
+function stageIndex(stage: HeroStage) {
+  return stageOrder.indexOf(stage)
+}
+
+const answerText =
+  'Yes. You have 30 days from the delivery date to request a return. Items must be in their original condition and packaging.'
+
+export function ChatPanel({
+  className = '',
+  stage = 'complete',
+}: {
+  className?: string
+  stage?: HeroStage
+}) {
+  const instant = stage === 'complete'
+  const questionVisible = stageIndex(stage) >= stageIndex('questionVisible')
+  const answerVisible = stageIndex(stage) >= stageIndex('answerVisible')
+  const sourceVisible = stageIndex(stage) >= stageIndex('sourceVisible')
+
+  const displayedAnswer = useTypedWords(answerText, answerVisible, instant, 55)
+
   return (
     <div
       className={`flex w-[300px] flex-col overflow-hidden rounded-2xl border border-kora-border bg-white shadow-panel ${className}`}
@@ -20,28 +56,44 @@ export function ChatPanel({ className = '' }: { className?: string }) {
 
       {/* Messages */}
       <div className="flex flex-col gap-3 bg-[#FAFAF8] px-4 py-4">
-        <div className="flex justify-end">
+        <motion.div
+          className="flex justify-end"
+          initial={{ opacity: 0, y: 8 }}
+          animate={questionVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+          transition={{ duration: instant ? 0 : 0.3, ease: 'easeOut' }}
+        >
           <div className="max-w-[85%] rounded-2xl rounded-br-md bg-kora-chip px-4 py-2.5 text-sm font-medium text-kora-text">
             Can I return my order?
           </div>
-        </div>
+        </motion.div>
 
-        <div className="flex justify-start">
+        <motion.div
+          className="flex justify-start"
+          initial={{ opacity: 0, y: 8 }}
+          animate={answerVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+          transition={{ duration: instant ? 0 : 0.35, ease: 'easeOut' }}
+        >
           <div className="max-w-[95%] rounded-2xl rounded-bl-md border border-kora-border bg-white px-4 py-3 text-sm leading-relaxed text-kora-text shadow-sm">
-            Yes. You have 30 days from the delivery date to request a return. Items
-            must be in their original condition and packaging.
+            {displayedAnswer}
             <div className="mt-3">
-              <button
+              <motion.button
                 type="button"
+                initial={{ opacity: 0, y: 6 }}
+                animate={
+                  sourceVisible
+                    ? { opacity: 1, y: 0 }
+                    : { opacity: 0, y: 6 }
+                }
+                transition={{ duration: instant ? 0 : 0.25, ease: 'easeOut' }}
                 className="group inline-flex items-center gap-1.5 rounded-full border border-kora-border bg-white px-3 py-1.5 text-xs font-medium text-kora-text shadow-sm transition-all hover:border-kora-accent hover:text-kora-accent"
               >
                 <FileText className="h-3.5 w-3.5 text-kora-muted transition-colors group-hover:text-kora-accent" />
                 Source · Return Policy
                 <ArrowRight className="h-3 w-3 text-kora-muted transition-all group-hover:translate-x-0.5 group-hover:text-kora-accent" />
-              </button>
+              </motion.button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Input */}
