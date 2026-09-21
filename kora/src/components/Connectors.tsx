@@ -1,22 +1,5 @@
 import { motion } from 'framer-motion'
-import type { HeroStage } from '../hooks/useHeroAnimation'
-
-const stageOrder: HeroStage[] = [
-  'idle',
-  'cardsVisible',
-  'connectorsVisible',
-  'signalsMoving',
-  'koraActivated',
-  'chatConnected',
-  'questionVisible',
-  'answerVisible',
-  'sourceVisible',
-  'complete',
-]
-
-function stageIndex(stage: HeroStage) {
-  return stageOrder.indexOf(stage)
-}
+import { isStageAtLeast, type HeroStage } from '../hooks/useHeroAnimation'
 
 const cardPaths = [
   { id: 'path-faq', d: 'M 18 26 Q 30 34 44 48' },
@@ -26,9 +9,9 @@ const cardPaths = [
 ]
 
 export function Connectors({ stage = 'complete' }: { stage?: HeroStage }) {
-  const connectorsVisible = stageIndex(stage) >= stageIndex('connectorsVisible')
-  const signalsMoving = stageIndex(stage) >= stageIndex('signalsMoving')
-  const chatConnected = stageIndex(stage) >= stageIndex('chatConnected')
+  const connectorsVisible = isStageAtLeast(stage, 'connectorsVisible')
+  const signalsMoving = isStageAtLeast(stage, 'signalsMoving')
+  const chatConnected = isStageAtLeast(stage, 'chatConnected')
   const instant = stage === 'complete'
 
   return (
@@ -95,7 +78,7 @@ export function Connectors({ stage = 'complete' }: { stage?: HeroStage }) {
       <g>
         <motion.path
           id="path-chat"
-          d="M 52 50 Q 56 50 60 50"
+          d="M 52 50 Q 56 47 60 50"
           fill="none"
           stroke="url(#connector)"
           strokeWidth="1"

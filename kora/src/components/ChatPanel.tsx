@@ -2,24 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight, FileText } from 'lucide-react'
 import { KoraMark } from './Logo'
 import { useTypedWords } from '../hooks/useTypedWords'
-import type { HeroStage } from '../hooks/useHeroAnimation'
-
-const stageOrder: HeroStage[] = [
-  'idle',
-  'cardsVisible',
-  'connectorsVisible',
-  'signalsMoving',
-  'koraActivated',
-  'chatConnected',
-  'questionVisible',
-  'answerVisible',
-  'sourceVisible',
-  'complete',
-]
-
-function stageIndex(stage: HeroStage) {
-  return stageOrder.indexOf(stage)
-}
+import { isStageAtLeast, type HeroStage } from '../hooks/useHeroAnimation'
 
 const answerText =
   'Yes. You have 30 days from the delivery date to request a return. Items must be in their original condition and packaging.'
@@ -32,9 +15,9 @@ export function ChatPanel({
   stage?: HeroStage
 }) {
   const instant = stage === 'complete'
-  const questionVisible = stageIndex(stage) >= stageIndex('questionVisible')
-  const answerVisible = stageIndex(stage) >= stageIndex('answerVisible')
-  const sourceVisible = stageIndex(stage) >= stageIndex('sourceVisible')
+  const questionVisible = isStageAtLeast(stage, 'questionVisible')
+  const answerVisible = isStageAtLeast(stage, 'answerVisible')
+  const sourceVisible = isStageAtLeast(stage, 'sourceVisible')
 
   const displayedAnswer = useTypedWords(answerText, answerVisible, instant, 55)
 

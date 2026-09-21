@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useReducedMotion } from './useReducedMotion'
+import { useReducedMotion } from 'framer-motion'
 
 export type HeroStage =
   | 'idle'
@@ -12,6 +12,27 @@ export type HeroStage =
   | 'answerVisible'
   | 'sourceVisible'
   | 'complete'
+
+export const heroStageOrder: HeroStage[] = [
+  'idle',
+  'cardsVisible',
+  'connectorsVisible',
+  'signalsMoving',
+  'koraActivated',
+  'chatConnected',
+  'questionVisible',
+  'answerVisible',
+  'sourceVisible',
+  'complete',
+]
+
+export function getStageIndex(stage: HeroStage): number {
+  return heroStageOrder.indexOf(stage)
+}
+
+export function isStageAtLeast(stage: HeroStage, target: HeroStage): boolean {
+  return getStageIndex(stage) >= getStageIndex(target)
+}
 
 const TIMELINE: { stage: HeroStage; delay: number }[] = [
   { stage: 'cardsVisible', delay: 350 },

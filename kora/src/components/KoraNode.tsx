@@ -1,23 +1,6 @@
 import { motion } from 'framer-motion'
 import { KoraMark } from './Logo'
-import type { HeroStage } from '../hooks/useHeroAnimation'
-
-const stageOrder: HeroStage[] = [
-  'idle',
-  'cardsVisible',
-  'connectorsVisible',
-  'signalsMoving',
-  'koraActivated',
-  'chatConnected',
-  'questionVisible',
-  'answerVisible',
-  'sourceVisible',
-  'complete',
-]
-
-function stageIndex(stage: HeroStage) {
-  return stageOrder.indexOf(stage)
-}
+import { isStageAtLeast, type HeroStage } from '../hooks/useHeroAnimation'
 
 export function KoraNode({
   className = '',
@@ -28,7 +11,7 @@ export function KoraNode({
 }) {
   const visible = stage !== 'idle'
   const instant = stage === 'complete'
-  const activated = stageIndex(stage) >= stageIndex('koraActivated')
+  const activated = isStageAtLeast(stage, 'koraActivated')
 
   return (
     <motion.div
