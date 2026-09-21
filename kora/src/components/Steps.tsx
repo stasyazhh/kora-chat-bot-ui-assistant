@@ -20,7 +20,7 @@ const steps = [
 
 export function Steps() {
   return (
-    <section className="mx-auto max-w-content px-6 pb-24 pt-10">
+    <section id="steps" className="mx-auto max-w-content px-6 pb-24 pt-10">
       <p className="mb-12 text-center text-[11px] font-medium uppercase tracking-[0.18em] text-kora-muted">
         EVERYTHING YOUR ASSISTANT NEEDS TO ANSWER WITH CONFIDENCE.
       </p>

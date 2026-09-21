@@ -3,6 +3,9 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      screens: {
+        desk: '1440px',
+      },
       colors: {
         kora: {
           bg: '#F7F6F2',
@@ -23,7 +26,7 @@ export default {
         panel: '0 20px 50px rgba(0, 0, 0, 0.06)',
       },
       maxWidth: {
-        'content': '1200px',
+        'content': '1320px',
       },
     },
   },

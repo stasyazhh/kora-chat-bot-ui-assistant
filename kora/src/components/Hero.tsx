@@ -1,57 +1,13 @@
-import { ArrowRight, BookOpen, CircleDollarSign, FileText, ShieldCheck } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { ArrowRight } from 'lucide-react'
 import { ChatPanel } from './ChatPanel'
-import { Connectors } from './Connectors'
-import { KnowledgeCard } from './KnowledgeCard'
-import { KoraNode } from './KoraNode'
-import { useHeroAnimation } from '../hooks/useHeroAnimation'
-
-const knowledgeCards = [
-  {
-    icon: <FileText className="h-4 w-4" style={{ color: '#7A8FA8' }} />,
-    iconBg: 'rgba(122, 143, 168, 0.12)',
-    title: 'FAQ',
-    subtitle: '128 questions',
-    fragments: ['How can I change my order?', 'Do you ship internationally?'],
-    rotation: '-rotate-3',
-    position: 'left-[10%] top-[18%]',
-  },
-  {
-    icon: <BookOpen className="h-4 w-4" style={{ color: '#6FA38C' }} />,
-    iconBg: 'rgba(111, 163, 140, 0.12)',
-    title: 'Product Guide',
-    subtitle: '42 sections',
-    fragments: ['Getting started', 'Installation & setup'],
-    rotation: 'rotate-2',
-    position: 'left-[58%] top-[12%]',
-  },
-  {
-    icon: <ShieldCheck className="h-4 w-4" style={{ color: '#8B84A8' }} />,
-    iconBg: 'rgba(139, 132, 168, 0.12)',
-    title: 'Return Policy',
-    subtitle: 'Updated Aug 12',
-    fragments: ['30-day returns', 'Original condition required'],
-    rotation: '-rotate-2',
-    position: 'left-[8%] top-[50%]',
-  },
-  {
-    icon: <CircleDollarSign className="h-4 w-4" style={{ color: '#B8976F' }} />,
-    iconBg: 'rgba(184, 151, 111, 0.12)',
-    title: 'Pricing',
-    subtitle: '12 plans & options',
-    fragments: ['Starter', 'Business'],
-    rotation: 'rotate-3',
-    position: 'left-[58%] top-[78%]',
-  },
-]
 
 export function Hero() {
-  const stage = useHeroAnimation()
-
   return (
-    <section className="mx-auto max-w-content px-6 pb-10 pt-10 lg:pt-16">
-      <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,500px)_1fr] lg:gap-10">
+    <section id="hero" className="mx-auto max-w-content px-6 pb-4 pt-10 lg:pt-16">
+      <div className="grid grid-cols-1 items-center gap-12 xl:grid-cols-[minmax(0,560px)_1fr] desk:grid-cols-[minmax(0,540px)_1fr] xl:gap-4">
         {/* Left side */}
-        <div className="max-w-xl">
+        <div>
           <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.18em] text-kora-muted">
             AI ASSISTANT FOR YOUR BUSINESS
           </p>
@@ -66,83 +22,25 @@ export function Hero() {
             answers — without writing code.
           </p>
           <div className="mt-8">
-            <a
-              href="#"
+            <Link
+              to="/app/onboarding"
               className="group inline-flex items-center gap-2 rounded-full bg-kora-accent px-7 py-3.5 text-base font-semibold text-white shadow-sm transition-all hover:bg-kora-accent-hover hover:shadow-md"
             >
               Build your assistant
               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />
-            </a>
+            </Link>
           </div>
           <p className="mt-4 text-xs text-kora-muted">No code · Set up in minutes</p>
         </div>
 
-        {/* Right side — desktop */}
-        <div className="relative hidden min-h-[720px] w-full lg:block">
-          <p className="absolute left-1/2 top-[4%] -translate-x-1/2 text-[10px] font-medium uppercase tracking-[0.18em] text-kora-muted">
-            YOUR KNOWLEDGE
-          </p>
-
-          <Connectors stage={stage} />
-
-          {knowledgeCards.map((card, index) => (
-            <KnowledgeCard
-              key={card.title}
-              icon={
-                <div
-                  className="flex h-9 w-9 items-center justify-center rounded-xl"
-                  style={{ backgroundColor: card.iconBg }}
-                >
-                  {card.icon}
-                </div>
-              }
-              title={card.title}
-              subtitle={card.subtitle}
-              fragments={card.fragments}
-              rotation={card.rotation}
-              stage={stage}
-              index={index}
-              className={`absolute ${card.position} z-20`}
-            />
-          ))}
-
-          {/* Compact Kora node */}
-          <KoraNode
-            stage={stage}
-            className="absolute left-[46%] top-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
+        {/* Right visual — image + ChatPanel */}
+        <div className="flex flex-col items-center gap-2 xl:flex-row xl:justify-center">
+          <img
+            src="/knowledge-flow.png"
+            alt="Company knowledge flowing into Kora"
+            className="h-auto w-full max-w-[380px] object-contain xl:flex-1"
           />
-
-          <ChatPanel stage={stage} className="absolute right-0 top-1/2 z-20 -translate-y-1/2" />
-        </div>
-
-        {/* Right side — mobile */}
-        <div className="flex flex-col items-center gap-6 lg:hidden">
-          <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-kora-muted">
-            YOUR KNOWLEDGE
-          </p>
-          <div className="grid w-full grid-cols-2 gap-3">
-            {knowledgeCards.map((card, index) => (
-              <KnowledgeCard
-                key={card.title}
-                icon={
-                  <div
-                    className="flex h-9 w-9 items-center justify-center rounded-xl"
-                    style={{ backgroundColor: card.iconBg }}
-                  >
-                    {card.icon}
-                  </div>
-                }
-                title={card.title}
-                subtitle={card.subtitle}
-                fragments={card.fragments}
-                rotation="rotate-0"
-                stage={stage}
-                index={index}
-              />
-            ))}
-          </div>
-          <KoraNode stage={stage} />
-          <ChatPanel stage={stage} />
+          <ChatPanel stage="complete" className="!w-[270px] flex-shrink-0" />
         </div>
       </div>
     </section>
